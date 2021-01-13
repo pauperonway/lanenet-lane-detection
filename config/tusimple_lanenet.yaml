@@ -53,10 +53,10 @@ TRAIN:
     TBOARD_SAVE_DIR: 'tboard/tusimple_multi/'
     MODEL_PARAMS_CONFIG_FILE_NAME: "model_train_config.json"
     RESTORE_FROM_SNAPSHOT:
-        ENABLE: True
+        ENABLE: False
         SNAPSHOT_PATH: '/workspace/lanenet-lane-detection/model/tusimple_multi/bisenetv2_lanenet/tusimple_val_miou=0.4735.ckpt-248'
     SNAPSHOT_EPOCH: 4
-    BATCH_SIZE: 32
+    BATCH_SIZE: 16
     VAL_BATCH_SIZE: 4
     EPOCH_NUMS: 905
     WARM_UP:
