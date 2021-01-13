@@ -143,7 +143,7 @@ def processXml(root_path):
                     semantic_v = 2
                     instance_v = instance_label_dict[instance_key]
                     break
-            if sematic_v == -1 and instance_v == -1:
+            if semantic_v == -1 and instance_v == -1:
                 print(name, instance.text)
                 continue
             if semantic_v == 0 or instance_v == 0:
@@ -257,15 +257,13 @@ def resizeAll(root_path):
     gt_image_dir = os.path.join(root_path, 'gt_image')
     gt_semantic_dir = os.path.join(root_path, 'gt_binary_image')
     gt_instance_dir = os.path.join(root_path, 'gt_instance_image')
-    dim = (1280, 720)
     pngs = os.listdir(gt_semantic_dir)
     for png in pngs:
         #semantic_new = semantic_image[min_h:max_h, :]
-     #CityTunnel: 20032514*; 505, 825
-#Highway:    14*;       415, 735
-#sanhuan:    2002*;     480, 800
-#shunyi:     frame*;    281, 505
-
+        #CityTunnel: 20032514*; 505, 825
+        #Highway:    14*;       415, 735
+        #sanhuan:    2002*;     480, 800
+        #shunyi:     frame*;    281, 505
 
         jpg = png[:-3] + 'jpg'
         org_im_path = os.path.join(gt_image_dir, jpg)
@@ -274,6 +272,7 @@ def resizeAll(root_path):
         org_im = cv2.imread(org_im_path, cv2.IMREAD_COLOR)
         semantic_im = cv2.imread(semantic_im_path, cv2.IMREAD_GRAYSCALE)
         instance_im = cv2.imread(instance_im_path, cv2.IMREAD_GRAYSCALE)
+        '''
         if jpg[:8] == '20032514': #CityTunnel
             #print(jpg[:8])
             org_im = org_im[505:825,:]
@@ -294,8 +293,10 @@ def resizeAll(root_path):
             org_im = org_im[281:505,:]
             semantic_im = semantic_im[281:505,:]
             instance_im = instance_im[281:505,:]
+        '''
         if org_im.shape[1] > 1280:
-            dim = (1280, 224)
+            #dim = (1280, 224)
+            dim = (1280, 720)
             org_im = cv2.resize(org_im, dim, interpolation = cv2.INTER_CUBIC)
             semantic_im = cv2.resize(semantic_im, dim, interpolation = cv2.INTER_NEAREST)
             instance_im = cv2.resize(instance_im, dim, interpolation = cv2.INTER_NEAREST)
